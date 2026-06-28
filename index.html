@@ -1,0 +1,352 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>네트워크 관리사 2급 필기 초고속 암기노트</title>
+    <style>
+        :root {
+            --primary-color: #2b6cb0;
+            --secondary-color: #319795;
+            --background-color: #f7fafc;
+            --card-color: #ffffff;
+            --text-color: #2d3748;
+            --accent-color: #dd6b20;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.7;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            text-align: center;
+            padding: 2.5rem 1rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.2rem;
+            font-weight: 700;
+        }
+
+        header p {
+            margin: 0.5rem 0 0 0;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .intro-box {
+            background-color: #ebf8ff;
+            border-left: 5px solid var(--primary-color);
+            padding: 1.5rem;
+            border-radius: 4px;
+            margin-bottom: 2.5rem;
+        }
+
+        .intro-box h2 {
+            margin-top: 0;
+            color: var(--primary-color);
+        }
+
+        .subject-card {
+            background-color: var(--card-color);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            padding: 2rem;
+            margin-bottom: 2.5rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        .subject-title {
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 0.5rem;
+            margin-top: 0;
+            font-size: 1.6rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .subject-info {
+            font-size: 0.9rem;
+            background-color: #edf2f7;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            color: #4a5568;
+        }
+
+        .concept-block {
+            margin-bottom: 1.8rem;
+        }
+
+        .concept-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: var(--accent-color);
+            margin-bottom: 0.4rem;
+        }
+
+        ul {
+            margin: 0;
+            padding-left: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        .highlight {
+            background-color: #feebc8;
+            font-weight: bold;
+            padding: 0 4px;
+            border-radius: 2px;
+        }
+
+        .tip-box {
+            background-color: #f0fff4;
+            border-left: 4px solid #38a169;
+            padding: 1rem;
+            margin-top: 0.8rem;
+            font-size: 0.95rem;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .tip-title {
+            font-weight: bold;
+            color: #276749;
+            margin-bottom: 0.2rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #718096;
+            font-size: 0.9rem;
+            border-top: 1px solid #e2e8f0;
+            margin-top: 4rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        th, td {
+            border: 1px solid #e2e8f0;
+            padding: 0.6rem;
+            text-align: left;
+        }
+
+        th {
+            background-color: #edf2f7;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>네트워크 관리사 2급 필기 초고속 암기노트</h1>
+        <p>비전공자 입문자를 위한 일상 비유 중심 핵심 요약집</p>
+    </header>
+
+    <div class="container">
+
+        <div class="intro-box">
+            <h2>합격 기준 및 전략 가이드</h2>
+            <p>네트워크 관리사 2급 필기는 <strong>총 50문항(50분)</strong>이 출제되며, 100점 만점에 <strong>60점(30문제) 이상</strong> 맞추면 과락 없이 합격입니다.</p>
+            <p>기출문제가 문제은행식으로 반복 출제되므로, 아래 이론의 핵심 개념을 "비유"로 먼저 머리에 넣고 기출문제를 풀면 훨씬 쉽게 정답이 보입니다.</p>
+        </div>
+
+        <div class="subject-card">
+            <div class="subject-title">
+                1과목. 네트워크 일반
+                <span class="subject-info">추천 목표: 10/12 문제</span>
+            </div>
+            <p>인터넷과 네트워크가 도대체 어떤 규칙으로 움직이는지 큰 그림을 배우는 과목입니다.</p>
+
+            <div class="concept-block">
+                <div class="concept-title">① OSI 7계층 (데이터가 이동하는 7개의 정거장)</div>
+                <p>네트워크를 통할 때 데이터는 7개의 단계를 거칩니다. 시험에서는 <strong>"각 계층의 대표 장비나 프로콜이 뭐냐?"</strong>를 무조건 묻습니다.</p>
+                <ul>
+                    <li><span class="highlight">1계층 물리(Physical):</span> 케이블, 리피터, 허브 (전기 신호가 오가는 진짜 물리적 선)</li>
+                    <li><span class="highlight">2계층 데이터링크(Data Link):</span> 브릿지, 스위치 / 프로토콜: <span class="highlight">MAC 주소</span>, HDLC, PPP (옆집 컴퓨터랑 직접 통신하기)</li>
+                    <li><span class="highlight">3계층 네트워크(Network):</span> <span class="highlight">라우터</span> / 프로토콜: <span class="highlight">IP</span>, ICMP, ARP (멀리 떨어진 목적지까지 길 찾기 - 내비게이션 역할)</li>
+                    <li><span class="highlight">4계층 전송(Transport):</span> 프로토콜: <span class="highlight">TCP, UDP</span> (데이터를 빵꾸 없이 안전하게 보낼지 결정)</li>
+                    <li><span class="highlight">5~7계층 세션/표현/응용(Application):</span> 프로토콜: HTTP(웹), FTP(파일), SMTP(메일), DNS(주소창) (사용자가 쓰는 프로그램 영역)</li>
+                </ul>
+                <div class="tip-box">
+                    <div class="tip-title">★ 무조건 출제되는 암기 팁</div>
+                    위에서 아래로 <strong>"물-데-네-전-세-표-응"</strong> 앞 글자를 따서 순서를 외우세요! 3계층 장비는 <strong>라우터</strong>, 2계층 장비는 <strong>스위치</strong>인 점이 단골 문제입니다.
+                </div>
+            </div>
+
+            <div class="concept-block">
+                <div class="concept-title">② TCP vs UDP (꼼꼼한 택배 vs 묻지마 던지기)</div>
+                <p>4계층의 핵심 통신 방식 두 가지입니다.</p>
+                <table>
+                    <tr>
+                        <th>특징</th>
+                        <th>TCP (Transmission Control Protocol)</th>
+                        <th>UDP (User Datagram Protocol)</th>
+                    </tr>
+                    <tr>
+                        <td><strong>연결 방식</strong></td>
+                        <td>연결형 (전화걸기식, 3-Way Handshaking)</td>
+                        <td>비연결형 (편지 보내기식)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>신뢰성</strong></td>
+                        <td><span class="highlight">높음</span> (확인 응답, 재전송 기능 있음)</td>
+                        <td><span class="highlight">낮음</span> (보내면 끝, 확인 안 함)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>속도</strong></td>
+                        <td>비교적 느림</td>
+                        <td>매우 빠름</td>
+                    </tr>
+                    <tr>
+                        <td><strong>용도</strong></td>
+                        <td>웹 브라우징(HTTP), 파일 전송(FTP)</td>
+                        <td>실시간 스트리밍, 영상 통화, DNS 서비스</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="concept-block">
+                <div class="concept-title">③ 중요 프로토콜들 이름 맞추기</div>
+                <ul>
+                    <li><strong>ICMP:</strong> "네트워크야 살아있니?" 네트워크 상태를 점검하고 에러를 알려주는 프로토콜 (ping 명령어의 기반)</li>
+                    <li><strong>ARP:</strong> "IP 주소는 아는데, 그 컴퓨터의 진짜 주민번호(<span class="highlight">MAC 주소</span>)가 뭐지?" 알려주는 프로토콜</li>
+                    <li><strong>RARP:</strong> ARP의 반대. MAC 주소를 가지고 IP 주소를 알아낼 때 사용</li>
+                    <li><strong>DNS:</strong> `naver.com` 같은 문자를 `223.130.195.200` 같은 숫자로 된 IP 주소로 바꿔주는 전화번호부 서비스</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="subject-card">
+            <div class="subject-title">
+                2과목. TCP/IP
+                <span class="subject-info">추천 목표: 14/17 문제 (가장 중요!)</span>
+            </div>
+            <p>합격을 결정짓는 과목입니다. 특히 계산 문제가 출제되니 꼼꼼하게 봐두어야 합니다.</p>
+
+            <div class="concept-block">
+                <div class="concept-title">① IP 주소 체계와 서브넷 마스크 (제일 중요!)</div>
+                <p>IP 주소는 클래스(Class)라는 덩어리로 나뉩니다. 맨 앞자리 숫자만 보고 어느 클래스인지 맞출 수 있어야 합니다.</p>
+                <ul>
+                    <li><strong>A 클래스:</strong> 1 ~ 126 (국가나 대기업용, 대형 네트워크)</li>
+                    <li><strong>B 클래스:</strong> 128 ~ 191 (중견기업, 대학용)</li>
+                    <li><strong>C 클래스:</strong> <span class="highlight">192 ~ 223</span> (우리 집, 소규모 사무실용) *가장 많이 출제!</li>
+                </ul>
+                <div class="tip-box">
+                    <div class="tip-title">★ 서브넷팅(Subnetting)의 핵심 개념</div>
+                    IP 주소가 아까워서 하나의 큰 네트워크를 <strong>여러 개의 작은 서브넷(Subnet)으로 쪼개는 것</strong>을 말합니다.
+                    이때 사용하는 마스크 가리개를 <strong>서브넷 마스크</strong>라고 합니다. <br>
+                    * 계산 팁: 기본 C클래스 서브넷 마스크는 `255.255.255.0` 입니다.
+                </div>
+            </div>
+
+            <div class="concept-block">
+                <div class="concept-title">② 사설 IP 주소 (집안용 가짜 IP)</div>
+                <p>전 세계에서 단 하나뿐인 공인 IP가 부족해서, 공유기 내부에서 공짜로 돌려 쓰는 가짜 주소 공간입니다. 외부 인터넷과 직접 통신이 불가능합니다.</p>
+                <ul>
+                    <li>A클래스 사설: 10.0.0.0 ~ 10.255.255.255</li>
+                    <li>B클래스 사설: 172.16.0.0 ~ 172.31.255.255</li>
+                    <li>C클래스 사설: <span class="highlight">192.168.0.0 ~ 192.168.255.255</span> (공유기 쓰면 백프로 나오는 그 주소!)</li>
+                </ul>
+            </div>
+
+            <div class="concept-block">
+                <div class="concept-title">③ IPv4 vs IPv6 (주소가 고갈되어 만든 새 주소)</div>
+                <ul>
+                    <li><strong>IPv4:</strong> 32비트 길이, 10진수로 표기 (예: 192.168.0.1), 점(.)으로 구분</li>
+                    <li><strong>IPv6:</strong> <span class="highlight">128비트</span> 길이, 16진수로 표기, 콜론(:)으로 구분, <span class="highlight">애니캐스트(Anycast)</span> 전송 방식 추가 (유니, 멀티, 애니캐스트 3종 세트)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="subject-card">
+            <div class="subject-title">
+                3과목. NOS (Network Operating System)
+                <span class="subject-info">추천 목표: 10/15 문제</span>
+            </div>
+            <p>Windows 서버와 Linux 서버를 다루는 방법, 계정 권한과 명령어 문제입니다.</p>
+
+            <div class="concept-block">
+                <div class="concept-title">① Windows Server 주요 개념</div>
+                <ul>
+                    <li><strong>액티브 디렉토리(Active Directory):</strong> 회사 내 모든 컴퓨터, 사용자 계정, 프린터를 한 곳에서 중앙 관리하는 윈도우 서버 시스템</li>
+                    <li><strong>IIS (Internet Information Services):</strong> 윈도우 서버에서 <span class="highlight">웹 서버</span>(홈페이지 띄우기)나 FTP 서버를 운영하기 위해 사용하는 프로그램</li>
+                    <li><strong>RAID (하드디스크 묶기 기술):</strong> 여러 하드가 하나처럼 움직여서 고장나도 복구되게 만드는 기술
+                        <ul>
+                            <li><strong>RAID 0 (스트라이핑):</strong> 데이터를 쪼개서 분산 저장. 속도는 제일 빠르나 하드 하나 고장 나면 다 깨짐.</li>
+                            <li><strong>RAID 1 (미러링):</strong> 똑같이 복사해서 두 군데 저장. 용량은 절반 손해 보지만 안정성 최고.</li>
+                            <li><strong>RAID 5:</strong> 최소 3개 하드 필요. 에러 체크용 데이터(패리티)를 나누어 저장하여 속도와 안정성 절충. 단골 출제!</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="concept-block">
+                <div class="concept-title">② 리눅스(Linux) 필수 명령어</div>
+                <p>시험에 매번 나오는 리눅스 명령어 5가지입니다.</p>
+                <ul>
+                    <li><span class="highlight">chmod:</span> 파일이나 폴더의 읽기/쓰기/실행 권한(Permission)을 변경할 때 사용</li>
+                    <li><span class="highlight">chown:</span> 파일의 소유자나 소유 그룹을 변경할 때 사용</li>
+                    <li><span class="highlight">pwd:</span> 내가 지금 어떤 디렉토리(폴더) 안에 들어가 있는지 현재 경로 표시</li>
+                    <li><span class="highlight">ls:</span> 현재 폴더 안에 무슨 파일들이 있는지 목록 보여주기</li>
+                    <li><span class="highlight">top:</span> 시스템의 CPU, 메모리 사용량 등 실시간 모니터링</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="subject-card">
+            <div class="subject-title">
+                4과목. 네트워크 운용기기
+                <span class="subject-info">추천 목표: 4/6 문제</span>
+            </div>
+            <p>눈에 보이는 기계 장비들의 특징을 맞추는 가장 간단한 과목입니다.</p>
+
+            <div class="concept-block">
+                <div class="concept-title">① 네트워크 장비 삼총사</div>
+                <ul>
+                    <li><strong>허브(Hub):</strong> 들어온 신호를 연결된 모든 컴퓨터에 멍청하게 다 뿌리는 장비 (대역폭이 분할되어 느려짐)</li>
+                    <li><strong>스위치(Switch):</strong> 목적지 MAC 주소를 확인하고 <span class="highlight">원하는 컴퓨터에게만 정확하게</span> 데이터를 쏘아주는 똑똑한 장비 (2계층)</li>
+                    <li><strong>라우터(Router):</strong> 서로 다른 네트워크(예: 우리 집 공항과 네이버 공항)를 연결해 주고, 목적지까지 <span class="highlight">최적의 경로</span>를 찾아 안내해 주는 내비게이션 장비 (3계층)</li>
+                </ul>
+            </div>
+
+            <div class="concept-block">
+                <div class="concept-title">② 게이트웨이(Gateway)와 더미 허브</div>
+                <ul>
+                    <li><strong>게이트웨이:</strong> 프로토콜 구조가 전혀 다른 네트워크 세계로 나가는 '출입구' 역할 (우리 집 공유기 IP가 보통 게이트웨이 역할을 함)</li>
+                    <li><strong>리피터:</strong> 선이 너무 길면 전기가 감쇄되니까, 약해진 신호를 다시 크게 증폭시켜 주는 장비</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>© 2026 네트워크 관리사 2급 필기 합격 가이드 웹페이지. 열공하셔서 한 번에 합격하세요!</p>
+    </footer>
+
+</body>
+</html>
