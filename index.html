@@ -6,13 +6,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>네트워크 관리사 2급 필기 초고속 암기노트</title>
     <style>
+        /* [기본값] 라이트 모드 테마 변수 */
         :root {
-            --primary-color: #2b6cb0;
-            --secondary-color: #319795;
             --background-color: #f7fafc;
             --card-color: #ffffff;
             --text-color: #2d3748;
+            --text-muted: #718096;
+            --primary-color: #2b6cb0;
+            --secondary-color: #319795;
             --accent-color: #dd6b20;
+            --table-header: #edf2f7;
+            --intro-bg: #ebf8ff;
+            --intro-text: #2b6cb0;
+            --tip-bg: #f0fff4;
+            --tip-border: #38a169;
+            --tip-title: #276749;
+            --highlight-bg: #feebc8;
+            --highlight-text: #2d3748;
+            --header-grad-1: #2b6cb0;
+            --header-grad-2: #319795;
+        }
+
+        /* [다크 모드] 테마 변수 (body에 .dark-mode 클래스가 붙으면 적용) */
+        body.dark-mode {
+            --background-color: #1a202c;
+            --card-color: #2d3748;
+            --text-color: #edf2f7;
+            --text-muted: #a0aec0;
+            --primary-color: #63b3ed;
+            --secondary-color: #4fd1c5;
+            --accent-color: #f6ad55;
+            --table-header: #4a5568;
+            --intro-bg: #2c5282;
+            --intro-text: #ebf8ff;
+            --tip-bg: #234e52;
+            --tip-border: #4fd1c5;
+            --tip-title: #4fd1c5;
+            --highlight-bg: #7b341e;
+            --highlight-text: #feebc8;
+            --header-grad-1: #1a365d;
+            --header-grad-2: #234e52;
         }
 
         body {
@@ -22,14 +55,16 @@
             line-height: 1.7;
             margin: 0;
             padding: 0;
+            transition: background-color 0.3s, color 0.3s; /* 부드러운 전환 효과 */
         }
 
         header {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            background: linear-gradient(135deg, var(--header-grad-1), var(--header-grad-2));
             color: white;
             text-align: center;
             padding: 2.5rem 1rem;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: relative;
         }
 
         header h1 {
@@ -44,6 +79,27 @@
             opacity: 0.9;
         }
 
+        /* 모드 전환 버튼 스타일 */
+        .theme-toggle-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+
+        .theme-toggle-btn:hover {
+            background-color: white;
+            color: #2b6cb0;
+        }
+
         .container {
             max-width: 1000px;
             margin: 2rem auto;
@@ -51,7 +107,7 @@
         }
 
         .intro-box {
-            background-color: #ebf8ff;
+            background-color: var(--intro-bg);
             border-left: 5px solid var(--primary-color);
             padding: 1.5rem;
             border-radius: 4px;
@@ -60,7 +116,7 @@
 
         .intro-box h2 {
             margin-top: 0;
-            color: var(--primary-color);
+            color: var(--intro-text);
         }
 
         .subject-card {
@@ -69,7 +125,8 @@
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
             padding: 2rem;
             margin-bottom: 2.5rem;
-            border: 1px solid #e2e8f0;
+            border: 1px solid var(--table-header);
+            transition: background-color 0.3s;
         }
 
         .subject-title {
@@ -85,10 +142,10 @@
 
         .subject-info {
             font-size: 0.9rem;
-            background-color: #edf2f7;
+            background-color: var(--table-header);
             padding: 0.2rem 0.6rem;
             border-radius: 20px;
-            color: #4a5568;
+            color: var(--text-color);
         }
 
         .concept-block {
@@ -112,15 +169,16 @@
         }
 
         .highlight {
-            background-color: #feebc8;
+            background-color: var(--highlight-bg);
+            color: var(--highlight-text);
             font-weight: bold;
-            padding: 0 4px;
-            border-radius: 2px;
+            padding: 2px 6px;
+            border-radius: 4px;
         }
 
         .tip-box {
-            background-color: #f0fff4;
-            border-left: 4px solid #38a169;
+            background-color: var(--tip-bg);
+            border-left: 4px solid var(--tip-border);
             padding: 1rem;
             margin-top: 0.8rem;
             font-size: 0.95rem;
@@ -129,16 +187,16 @@
 
         .tip-title {
             font-weight: bold;
-            color: #276749;
+            color: var(--tip-title);
             margin-bottom: 0.2rem;
         }
 
         footer {
             text-align: center;
             padding: 2rem;
-            color: #718096;
+            color: var(--text-muted);
             font-size: 0.9rem;
-            border-top: 1px solid #e2e8f0;
+            border-top: 1px solid var(--table-header);
             margin-top: 4rem;
         }
 
@@ -149,13 +207,13 @@
         }
 
         th, td {
-            border: 1px solid #e2e8f0;
+            border: 1px solid var(--table-header);
             padding: 0.6rem;
             text-align: left;
         }
 
         th {
-            background-color: #edf2f7;
+            background-color: var(--table-header);
         }
     </style>
 </head>
@@ -164,6 +222,7 @@
     <header>
         <h1>네트워크 관리사 2급 필기 초고속 암기노트</h1>
         <p>비전공자 입문자를 위한 일상 비유 중심 핵심 요약집</p>
+        <button class="theme-toggle-btn" onclick="toggleDarkMode()">🌓 모드 전환</button>
     </header>
 
     <div class="container">
@@ -177,13 +236,13 @@
         <div class="subject-card">
             <div class="subject-title">
                 1과목. 네트워크 일반
-                <span class="subject-info">추천 목표: 10/12 문제</span>
+                <span class="subject-info">10문항 출제</span>
             </div>
-            <p>인터넷과 네트워크가 도대체 어떤 규칙으로 움직이는지 큰 그림을 배우는 과목입니다.</p>
+            <p style="color: var(--text-muted);">인터넷과 네트워크가 도대체 어떤 규칙으로 움직이는지 큰 그림을 배우는 과목입니다.</p>
 
             <div class="concept-block">
                 <div class="concept-title">① OSI 7계층 (데이터가 이동하는 7개의 정거장)</div>
-                <p>네트워크를 통할 때 데이터는 7개의 단계를 거칩니다. 시험에서는 <strong>"각 계층의 대표 장비나 프로콜이 뭐냐?"</strong>를 무조건 묻습니다.</p>
+                <p>네트워크를 통할 때 데이터는 7개의 단계를 거칩니다. 시험에서는 <strong>"각 계층의 대표 장비나 프로토콜이 뭐냐?"</strong>를 무조건 묻습니다.</p>
                 <ul>
                     <li><span class="highlight">1계층 물리(Physical):</span> 케이블, 리피터, 허브 (전기 신호가 오가는 진짜 물리적 선)</li>
                     <li><span class="highlight">2계층 데이터링크(Data Link):</span> 브릿지, 스위치 / 프로토콜: <span class="highlight">MAC 주소</span>, HDLC, PPP (옆집 컴퓨터랑 직접 통신하기)</li>
@@ -243,9 +302,9 @@
         <div class="subject-card">
             <div class="subject-title">
                 2과목. TCP/IP
-                <span class="subject-info">추천 목표: 14/17 문제 (가장 중요!)</span>
+                <span class="subject-info">17문항 출제 (가장 중요!)</span>
             </div>
-            <p>합격을 결정짓는 과목입니다. 특히 계산 문제가 출제되니 꼼꼼하게 봐두어야 합니다.</p>
+            <p style="color: var(--text-muted);">합격을 결정짓는 과목입니다. 특히 계산 문제가 출제되니 꼼꼼하게 봐두어야 합니다.</p>
 
             <div class="concept-block">
                 <div class="concept-title">① IP 주소 체계와 서브넷 마스크 (제일 중요!)</div>
@@ -285,9 +344,9 @@
         <div class="subject-card">
             <div class="subject-title">
                 3과목. NOS (Network Operating System)
-                <span class="subject-info">추천 목표: 10/15 문제</span>
+                <span class="subject-info">18문항 출제</span>
             </div>
-            <p>Windows 서버와 Linux 서버를 다루는 방법, 계정 권한과 명령어 문제입니다.</p>
+            <p style="color: var(--text-muted);">Windows 서버와 Linux 서버를 다루는 방법, 계정 권한과 명령어 문제입니다.</p>
 
             <div class="concept-block">
                 <div class="concept-title">① Windows Server 주요 개념</div>
@@ -320,9 +379,9 @@
         <div class="subject-card">
             <div class="subject-title">
                 4과목. 네트워크 운용기기
-                <span class="subject-info">추천 목표: 4/6 문제</span>
+                <span class="subject-info">5문항 출제</span>
             </div>
-            <p>눈에 보이는 기계 장비들의 특징을 맞추는 가장 간단한 과목입니다.</p>
+            <p style="color: var(--text-muted);">눈에 보이는 기계 장비들의 특징을 맞추는 가장 간단한 과목입니다.</p>
 
             <div class="concept-block">
                 <div class="concept-title">① 네트워크 장비 삼총사</div>
@@ -345,8 +404,14 @@
     </div>
 
     <footer>
-        <p>© 2026 네트워크 관리사 2급 필기 합격 가이드 웹페이지. 열공하셔서 한 번에 합격하세요!</p>
+        <p>© 2026 네트워크 관리사 2급 필기 합격 가이드 웹페이지. 원하시는 모드로 편하게 열공하세요!</p>
     </footer>
 
+    <script>
+        function toggleDarkMode() {
+            // body 요소에 dark-mode 클래스를 껐다 켰다(toggle) 합니다.
+            document.body.classList.toggle('dark-mode');
+        }
+    </script>
 </body>
 </html>
