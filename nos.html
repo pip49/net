@@ -1,0 +1,508 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3과목 NOS - 고빈출 단답형 50제</title>
+    <style>
+        /* 기본 라이트 모드 변수 */
+        :root {
+            --background-color: #f7fafc;
+            --card-color: #ffffff;
+            --text-color: #2d3748;
+            --text-muted: #718096;
+            --primary-color: #2c5282;
+            --secondary-color: #4a5568;
+            --accent-color: #b7791f;
+            --border-color: #e2e8f0;
+            --quiz-bg: #edf2f7;
+            --ans-bg: #ebf8ff;
+            --ans-text: #2b6cb0;
+            --header-grad-1: #2c5282;
+            --header-grad-2: #4a5568;
+        }
+
+        /* 다크 모드 변수 */
+        body.dark-mode {
+            --background-color: #1a202c;
+            --card-color: #2d3748;
+            --text-color: #edf2f7;
+            --text-muted: #a0aec0;
+            --primary-color: #90cdf4;
+            --secondary-color: #cbd5e0;
+            --accent-color: #f6ad55;
+            --border-color: #4a5568;
+            --quiz-bg: #1a202c;
+            --ans-bg: #2b6cb0;
+            --ans-text: #ebf8ff;
+            --header-grad-1: #1a202c;
+            --header-grad-2: #2d3748;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.7;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--header-grad-1), var(--header-grad-2));
+            color: white;
+            text-align: center;
+            padding: 2.5rem 1rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        header p {
+            margin: 0.5rem 0 0 0;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .theme-toggle-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+
+        .theme-toggle-btn:hover {
+            background-color: white;
+            color: #2c5282;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .info-box {
+            background-color: var(--quiz-bg);
+            padding: 1.2rem;
+            border-radius: 6px;
+            margin-bottom: 2rem;
+            border-left: 5px solid var(--primary-color);
+        }
+
+        .quiz-item {
+            background-color: var(--card-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .quiz-question {
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .quiz-number {
+            color: var(--accent-color);
+            margin-right: 0.5rem;
+            min-width: 25px;
+        }
+
+        .btn-show {
+            background-color: var(--secondary-color);
+            color: var(--card-color);
+            border: none;
+            padding: 6px 14px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: bold;
+            transition: opacity 0.2s;
+        }
+
+        .btn-show:hover {
+            opacity: 0.85;
+        }
+
+        .quiz-answer {
+            margin-top: 0.8rem;
+            padding: 0.8rem 1.2rem;
+            background-color: var(--ans-bg);
+            color: var(--ans-text);
+            border-radius: 4px;
+            font-weight: bold;
+            display: none;
+        }
+
+        .quiz-answer.visible {
+            display: block;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: 4rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>3과목 NOS(네트워크 운영체제) - 고빈출 50제 퀴즈</h1>
+        <p>Windows Server 기능 및 Linux 필수 명령어를 완벽하게 마스터하세요.</p>
+        <button class="theme-toggle-btn" onclick="toggleDarkMode()">🌓 모드 전환</button>
+    </header>
+
+    <div class="container">
+        <div class="info-box">
+            📌 <strong>학습 가이드:</strong> 3과목(NOS)은 18문항이 출제되는 고배점 과목입니다. Windows Server의 도메인/디렉토리 구조와 RAID 연산 기법, 그리고 Linux의 핵심 관리 명령어 및 권한 표기법(8진수)에 대한 개념을 꼼꼼히 정리해 두어야 고득점이 가능합니다.
+        </div>
+
+        <div id="quiz-container">
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q1.</span> Windows Server에서 회사 내 모든 사용자 계정, 컴퓨터 장비, 프린터 등의 자원을 하나의 데이터베이스로 통합 관리하는 디렉토리 서비스의 명칭은?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">액티브 디렉토리 (Active Directory)</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q2.</span> Windows Server에서 웹 서버(HTTP), FTP 서버 등을 손쉽게 구축하고 구성할 수 있도록 지원하는 인터넷 통합 서비스 부가 기능은?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">IIS (Internet Information Services)</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q3.</span> 여러 개의 하드디스크를 하나로 묶어 성능을 높이거나 안정성을 강화하는 저장장치 이중화 기술의 명칭은?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">RAID (Redundant Array of Independent Disks)</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q4.</span> RAID 레벨 중, 데이터를 여러 하드에 조각내어 분산 저장(스트라이핑)하여 속도는 가장 빠르지만 복구 기능이 전혀 없는 레벨은?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">RAID 0</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q5.</span> RAID 레벨 중, 두 개 이상의 하드디스크에 동일한 데이터를 완전 복사하여 백업(미러링)하는 방식으로 공간 효율은 50%로 낮지만 안정성이 최고인 레벨은?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">RAID 1</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q6.</span> 최소 3개의 하드디스크가 필요하며, 에러 체크용 데이터인 패리티(Parity) 정보를 각 하드에 분산 저장하여 디스크 하나가 고장 나도 복구가 가능한 실무 단골 출제 RAID 레벨은?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">RAID 5</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q7.</span> 성능을 높이는 스트라이핑(RAID 0)과 안정성을 높이는 미러링(RAID 1) 구조를 동시에 결합하여 사용하는 복합 RAID 형태는?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">RAID 1+0 (또는 RAID 10)</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q8.</span> Windows Server의 파일 시스템 중 데이터 압축, 파일 암호화(EFS), 개별 사용자 권한 설정 등을 지원하는 고성능 표준 파일 시스템은?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">NTFS (New Technology File System)</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q9.</span> 컴퓨터의 전원이 켜진 상태에서 장비의 손상이나 가동 중단 없이 하드디스크나 장치를 즉시 장착하거나 분리할 수 있는 기능을 뜻하는 용어는?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">핫 플러깅 (Hot Plugging) 또는 핫 스왑 (Hot Swap)</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q10.</span> Windows Server의 작업 관리자에서 실행 중인 프로세스의 강제 종료, CPU 및 메모리 점유율을 모니터링하기 위해 사용하는 단축키는?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">Ctrl + Shift + Esc</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q11.</span> Windows Server의 이벤트 뷰어에서 수집하는 로그 종류 3가지는 응용 프로그램 로그, 보안 로그, 그리고 나머지 하나는 무엇인가?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">시스템 로그 (System Log)</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q12.</span> Windows Server에서 하드디스크의 남은 공간을 사용자별로 제한하여 무분별한 저장소 독점을 막는 기능의 명칭은?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">디스크 할당량 (Disk Quota)</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q13.</span> Windows Server의 DNS 서비스에서 `도메인 영문 주소`를 기반으로 `숫자형 IP 주소`를 찾아내는 일반적인 조회를 무엇이라 하는가?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">정방향 조회 (Forward Lookup)</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q14.</span> 반대로 `숫자형 IP 주소`를 가지고 해당 컴퓨터의 `영문 도메인 네임`을 추적해 내는 DNS 조회 방식을 무엇이라 하는가?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">역방향 조회 (Reverse Lookup)</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q15.</span> Windows DNS 서버의 리소스 레코드 종류 중 호스트의 도메인 네임을 IPv4 주소와 1:1로 매핑해 주는 가장 기본 레코드는?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">A 레코드 (Address 레코드)</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q16.</span> Windows DNS 서버 리소스 레코드 중 도메인의 별칭(Alias)을 지정할 때 사용하여 하나의 IP에 여러 도메인 이름을 연결할 수 있게 돕는 레코드는?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">CNAME (Canonical Name) 레코드</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q17.</span> Windows DNS 서버 리소스 레코드 중 역방향 조회(IP 주소를 도메인으로 변환)를 위해 사용되는 레코드 명칭은?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">PTR (Pointer) 레코드</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q18.</span> Windows DNS 서버 리소스 레코드 중 해당 도메인의 이메일 라우팅(메일 서버)을 지정하기 위해 사용하는 레코드는?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">MX (Mail Exchanger) 레코드</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q19.</span> Windows Server에서 프린터를 공유할 때 여러 대의 동종 프린터를 하나의 논리적인 프린터 드라이버로 묶어 출력 속도를 분산 처리하는 기술은?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">프린터 풀링 (Printer Pooling)</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q20.</span> Windows Server 성능 모니터에서 시스템 리소스 중 데이터를 저장하거나 불러올 때 병목 현상이 생기는지 진단하기 위해 확인하는 핵심 개체는?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">PhysicalDisk (물리적 디스크)</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q21.</span> 리눅스 시스템에서 가장 강력한 권한을 가진 최고 관리자 계정의 이름은 무엇인가?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">root</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q22.</span> 리눅스에서 파일이나 폴더의 읽기(r), 쓰기(w), 실행(x) 권한(Permission)을 변경할 때 사용하는 필수 명령어는?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">chmod</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q23.</span> 리눅스에서 특정 파일이나 디렉토리의 소유자(Owner) 및 소유 그룹을 변경할 때 사용하는 명령어는?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">chown</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q24.</span> 리눅스 터미널 창에서 "내가 지금 어떤 폴더 경로 안에 들어와 있는지" 현재 작업 디렉토리의 절대 경로를 보여주는 명령어는?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">pwd (Print Working Directory)</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q25.</span> 리눅스에서 현재 디렉토리 내에 존재하는 파일과 폴더의 목록을 보여주는 명령어는?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">ls</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q26.</span> 리눅스에서 텍스트 파일의 내용을 화면에 그대로 출력하거나, 여러 파일을 하나로 결합할 때 사용하는 명령어는?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">cat (Concatenate)</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q27.</span> 리눅스에서 파일의 내용을 페이지 단위로 화면에 나누어 출력해 주며, 스페이스바를 눌러 다음 페이지로 넘길 수 있는 명령어는?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">more (또는 less)</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q28.</span> 리눅스에서 빈 파일을 생성하거나, 이미 존재하는 파일의 수정 시간을 현재 시간으로 갱신해 주는 명령어는?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">touch</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q29.</span> 리눅스에서 새로운 디렉토리(폴더)를 생성할 때 사용하는 명령어는?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">mkdir (Make Directory)</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q30.</span> 리눅스에서 파일이나 디렉토리를 완전히 삭제할 때 사용하는 명령어는?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">rm (Remove)</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q31.</span> 리눅스에서 하드디스크의 전체 용량과 현재 사용 중인 디스크 공간의 정보를 사람이 보기 편하게(KB, MB 단위 등) 출력해 주는 명령어는?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">df (Disk Free)</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q32.</span> 리눅스 시스템의 CPU 및 메모리 사용량, 실행 중인 프로세스 목록을 실시간으로 화면에 갱신해 보여주는 모니터링 명령어는?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">top</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q33.</span> 리눅스에서 현재 메모리의 총용량, 사용 중인 용량, 비어있는 남은 용량 및 스왑(Swap) 메모리 상태를 파악하는 명령어는?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">free</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q34.</span> 리눅스 환경에서 새 사용자 계정을 추가 생성할 때 사용하는 행정 명령어는?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">useradd (또는 adduser)</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q35.</span> 사용자의 비밀번호를 설정하거나 변경할 때 사용하는 명령어는?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">passwd</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q36.</span> 어떤 파일 내부나 명령어 출력 결과 중에서 내가 원하는 특정 문자열(패턴)이 포함된 라인만 필터링해 찾아주는 검색 명령어는?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">grep</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q37.</span> 리눅스에서 현재 시스템에 작동 중인 모든 프로세스의 상태 및 PID(프로세스 아이디) 번호를 일괄 출력하는 명령어는?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">ps (특히 ps -ef 또는 ps aux 형태로 많이 쓰임)</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q38.</span> 비정상적으로 동작하거나 멈춰버린 특정 프로세스를 PID 번호 등을 이용해 강제 종료시키는 제어 명령어는?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">kill</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q39.</span> 리눅스 텍스트 터미널 환경에서 가장 널리 쓰이는 표준 화면 편집기(텍스트 에디터) 명령어는?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">vi (또는 vim)</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q40.</span> 시스템을 즉시 안전하게 종료하거나 리부팅할 때 사용하는 관리자용 명령어는?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">shutdown (또는 halt, reboot)</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q41.</span> 리눅스 파일 권한 기호 중 `rwxr-xr-x` 가 의미하는 8진수 파일 권한 숫자는 무엇인가?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">755 (rwx=7, r-x=5, r-x=5)</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q42.</span> 리눅스 파일 권한 중 소유자, 그룹, 타인 모두에게 읽기 및 쓰기 권한만 부여하고 실행 권한은 빼고 싶을 때 지정하는 8진수 숫자는?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">666 (rw-=6, rw-=6, rw-=6)</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q43.</span> 리눅스 시스템에서 사용자 계정의 이름, UID, 기본 홈 디렉토리, 기본 셸 정보가 줄줄이 보관된 핵심 설정 파일의 경로는?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">/etc/passwd</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q44.</span> 리눅스 사용자 계정들의 실제 비밀번호가 안전하게 일방향 암호화(해시)되어 저장되어 있는 보안 파일의 경로는?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">/etc/shadow</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q45.</span> 리눅스 부팅 시 자동으로 마운트(연결)할 하드디스크 파티션 및 저장장치의 목록 정보를 담고 있는 설정 파일은?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">/etc/fstab</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q46.</span> 리눅스에서 주기적이고 반복적인 예약 작업(스케줄러 프로그램)을 등록하고 자동 관리하기 위해 사용하는 데몬 및 설정 명령어 명칭은?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">cron (또는 crontab)</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q47.</span> 리눅스 환경에서 도메인 네임 서버(DNS)의 IP 주소를 수동으로 지정하고 등록해 두는 네트워크 설정 파일의 경로는?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">/etc/resolv.conf</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q48.</span> 리눅스의 뼈대가 되는 핵심 커널이 부팅될 때 필요한 초기화 램 디스크 이미지 파일들이 주로 모여 보관되는 디렉토리 경로는?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">/boot</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q49.</span> 리눅스에서 파일이나 디렉토리가 생성될 때 자동으로 차단할 권한 가리개를 세팅하여 기본 초기 권한 값을 결정해 주는 명령어(개념)는?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">umask</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q50.</span> 리눅스에서 파일이나 명령어를 찾기 위해 디렉토리 목록 데이터베이스를 실시간 고속 검색해 내는 명령어는?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">locate (또는 find)</div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 네트워크 관리사 2급 3과목 마스터 퀴즈 북. 반복만이 합격의 지름길입니다!</p>
+    </footer>
+
+    <script>
+        function toggleAnswer(button) {
+            const answerBox = button.nextElementSibling;
+            if (answerBox.classList.contains('visible')) {
+                answerBox.classList.remove('visible');
+                button.textContent = '정답 확인';
+            } else {
+                answerBox.classList.add('visible');
+                button.textContent = '정답 숨기기';
+            }
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+        }
+    </script>
+</body>
+</html>

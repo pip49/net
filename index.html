@@ -27,7 +27,7 @@
             --header-grad-2: #319795;
         }
 
-        /* [다크 모드] 테마 변수 (body에 .dark-mode 클래스가 붙으면 적용) */
+        /* [다크 모드] 테마 변수 */
         body.dark-mode {
             --background-color: #1a202c;
             --card-color: #2d3748;
@@ -55,7 +55,7 @@
             line-height: 1.7;
             margin: 0;
             padding: 0;
-            transition: background-color 0.3s, color 0.3s; /* 부드러운 전환 효과 */
+            transition: background-color 0.3s, color 0.3s;
         }
 
         header {
@@ -79,7 +79,6 @@
             opacity: 0.9;
         }
 
-        /* 모드 전환 버튼 스타일 */
         .theme-toggle-btn {
             position: absolute;
             top: 20px;
@@ -231,12 +230,21 @@
             <h2>합격 기준 및 전략 가이드</h2>
             <p>네트워크 관리사 2급 필기는 <strong>총 50문항(50분)</strong>이 출제되며, 100점 만점에 <strong>60점(30문제) 이상</strong> 맞추면 과락 없이 합격입니다.</p>
             <p>기출문제가 문제은행식으로 반복 출제되므로, 아래 이론의 핵심 개념을 "비유"로 먼저 머리에 넣고 기출문제를 풀면 훨씬 쉽게 정답이 보입니다.</p>
+
+            <hr style="border: 0; border-top: 1px solid var(--primary-color); opacity: 0.3; margin: 1.5rem 0;">
+            <p style="font-weight: bold; margin-bottom: 0.7rem;">🚀 과목별 핵심 단답형 50/20제 퀴즈 바로가기:</p>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <a href="network.html" style="background: var(--primary-color); color: white; padding: 8px 16px; border-radius: 4px; text-decoration: none; font-weight: bold; font-size: 0.9rem;">📝 1과목 퀴즈</a>
+                <a href="tcpip.html" style="background: var(--primary-color); color: white; padding: 8px 16px; border-radius: 4px; text-decoration: none; font-weight: bold; font-size: 0.9rem;">📝 2과목 퀴즈</a>
+                <a href="nos.html" style="background: var(--primary-color); color: white; padding: 8px 16px; border-radius: 4px; text-decoration: none; font-weight: bold; font-size: 0.9rem;">📝 3과목 퀴즈</a>
+                <a href="device.html" style="background: var(--primary-color); color: white; padding: 8px 16px; border-radius: 4px; text-decoration: none; font-weight: bold; font-size: 0.9rem;">📝 4과목 퀴즈</a>
+            </div>
         </div>
 
         <div class="subject-card">
             <div class="subject-title">
-                1과목. 네트워크 일반
-                <span class="subject-info">10문항 출제</span>
+                <span>1과목. 네트워크 일반 <span class="subject-info">10문항 출제</span></span>
+                <a href="network.html" style="background-color: var(--accent-color); color: white; text-decoration: none; font-size: 0.85rem; padding: 5px 12px; border-radius: 20px; font-weight: bold;">🎯 퀴즈 풀기 🔗</a>
             </div>
             <p style="color: var(--text-muted);">인터넷과 네트워크가 도대체 어떤 규칙으로 움직이는지 큰 그림을 배우는 과목입니다.</p>
 
@@ -301,8 +309,8 @@
 
         <div class="subject-card">
             <div class="subject-title">
-                2과목. TCP/IP
-                <span class="subject-info">17문항 출제 (가장 중요!)</span>
+                <span>2과목. TCP/IP <span class="subject-info">17문항 출제 (가장 중요!)</span></span>
+                <a href="tcpip.html" style="background-color: var(--accent-color); color: white; text-decoration: none; font-size: 0.85rem; padding: 5px 12px; border-radius: 20px; font-weight: bold;">🎯 퀴즈 풀기 🔗</a>
             </div>
             <p style="color: var(--text-muted);">합격을 결정짓는 과목입니다. 특히 계산 문제가 출제되니 꼼꼼하게 봐두어야 합니다.</p>
 
@@ -343,8 +351,8 @@
 
         <div class="subject-card">
             <div class="subject-title">
-                3과목. NOS (Network Operating System)
-                <span class="subject-info">18문항 출제</span>
+                <span>3과목. NOS (Network Operating System) <span class="subject-info">18문항 출제</span></span>
+                <a href="nos.html" style="background-color: var(--accent-color); color: white; text-decoration: none; font-size: 0.85rem; padding: 5px 12px; border-radius: 20px; font-weight: bold;">🎯 퀴즈 풀기 🔗</a>
             </div>
             <p style="color: var(--text-muted);">Windows 서버와 Linux 서버를 다루는 방법, 계정 권한과 명령어 문제입니다.</p>
 
@@ -378,8 +386,8 @@
 
         <div class="subject-card">
             <div class="subject-title">
-                4과목. 네트워크 운용기기
-                <span class="subject-info">5문항 출제</span>
+                <span>4과목. 네트워크 운용기기 <span class="subject-info">5문항 출제</span></span>
+                <a href="device.html" style="background-color: var(--accent-color); color: white; text-decoration: none; font-size: 0.85rem; padding: 5px 12px; border-radius: 20px; font-weight: bold;">🎯 퀴즈 풀기 🔗</a>
             </div>
             <p style="color: var(--text-muted);">눈에 보이는 기계 장비들의 특징을 맞추는 가장 간단한 과목입니다.</p>
 
@@ -409,7 +417,6 @@
 
     <script>
         function toggleDarkMode() {
-            // body 요소에 dark-mode 클래스를 껐다 켰다(toggle) 합니다.
             document.body.classList.toggle('dark-mode');
         }
     </script>

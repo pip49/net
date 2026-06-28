@@ -1,0 +1,509 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2과목 TCP/IP - 고빈출 단답형 50제</title>
+    <style>
+        /* 기본 라이트 모드 변수 */
+        :root {
+            --background-color: #f7fafc;
+            --card-color: #ffffff;
+            --text-color: #2d3748;
+            --text-muted: #718096;
+            --primary-color: #2b6cb0;
+            --secondary-color: #319795;
+            --accent-color: #dd6b20;
+            --border-color: #e2e8f0;
+            --quiz-bg: #edf2f7;
+            --ans-bg: #e6fffa;
+            --ans-text: #234e52;
+            --header-grad-1: #2b6cb0;
+            --header-grad-2: #2b6cb0;
+        }
+
+        /* 다크 모드 변수 */
+        body.dark-mode {
+            --background-color: #1a202c;
+            --card-color: #2d3748;
+            --text-color: #edf2f7;
+            --text-muted: #a0aec0;
+            --primary-color: #63b3ed;
+            --secondary-color: #4fd1c5;
+            --accent-color: #f6ad55;
+            --border-color: #4a5568;
+            --quiz-bg: #1a202c;
+            --ans-bg: #234e52;
+            --ans-text: #e6fffa;
+            --header-grad-1: #1a365d;
+            --header-grad-2: #2c5282;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.7;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--header-grad-1), var(--header-grad-2));
+            color: white;
+            text-align: center;
+            padding: 2.5rem 1rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        header p {
+            margin: 0.5rem 0 0 0;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .theme-toggle-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+
+        .theme-toggle-btn:hover {
+            background-color: white;
+            color: #2b6cb0;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .info-box {
+            background-color: var(--quiz-bg);
+            padding: 1.2rem;
+            border-radius: 6px;
+            margin-bottom: 2rem;
+            border-left: 5px solid var(--accent-color);
+        }
+
+        .quiz-item {
+            background-color: var(--card-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .quiz-question {
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .quiz-number {
+            color: var(--primary-color);
+            margin-right: 0.5rem;
+            min-width: 25px;
+        }
+
+        .btn-show {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: bold;
+            transition: opacity 0.2s;
+        }
+
+        .btn-show:hover {
+            opacity: 0.9;
+        }
+
+        .quiz-answer {
+            margin-top: 0.8rem;
+            padding: 0.8rem 1.2rem;
+            background-color: var(--ans-bg);
+            color: var(--ans-text);
+            border-radius: 4px;
+            font-weight: bold;
+            display: none;
+        }
+
+        .quiz-answer.visible {
+            display: block;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: 4rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>2과목 TCP/IP - 고빈출 50제 퀴즈</h1>
+        <p>가장 출제 비중이 높은 핵심 과목! 정답 확인 버튼을 활용해 암기해 보세요.</p>
+        <button class="theme-toggle-btn" onclick="toggleDarkMode()">🌓 모드 전환</button>
+    </header>
+
+    <div class="container">
+        <div class="info-box">
+            📌 <strong>학습 가이드:</strong> 2과목(TCP/IP)은 IP 주소 클래스 구분, 서브넷 마스크 계산 기법, IPv4/v6 특징, 그리고 수많은 계층별 프로토콜(ARP, ICMP, 계정 프로토콜 등)의 기능 정의가 단골 출제됩니다. 반복해서 눈에 익혀두세요!
+        </div>
+
+        <div id="quiz-container">
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q1.</span> IPv4 주소는 총 몇 비트(Bit)로 구성되어 있는가?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">32비트</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q2.</span> IPv4 주소에서 하나의 옥텟(Octet)은 몇 비트를 의미하는가?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">8비트 (총 4개의 옥텟으로 32비트 구성)</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q3.</span> IPv4 주소 중 첫 번째 옥텟의 범위가 1~126인 대규모 네트워크용 클래스는?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">A 클래스</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q4.</span> IPv4 주소 중 첫 번째 옥텟의 범위가 192~223인 소규모 네트워크용 클래스는?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">C 클래스</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q5.</span> C 클래스의 기본(Default) 서브넷 마스크 주소는 무엇인가?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">255.255.255.0</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q6.</span> B 클래스의 기본(Default) 서브넷 마스크 주소는 무엇인가?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">255.255.0.0</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q7.</span> 자신의 컴퓨터 시스템이 통신망에 정상적으로 연결되었는지 테스트하기 위해 할당된 루프백(Loopback) 특수 주소는?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">127.0.0.1</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q8.</span> 호스트 식별자 비트가 모두 '0'인 주소로, 해당 네트워크 자체를 대표하는 주소를 무엇이라 하는가?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">네트워크 주소</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q9.</span> 호스트 식별자 비트가 모두 '1'인 주소로, 해당 네트워크 내 모든 컴퓨터에 데이터를 보낼 때 쓰이는 주소는?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">브로드캐스트 주소</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q10.</span> 서브넷 마스크가 255.255.255.240일 때, 하나의 서브넷당 가질 수 있는 이론상 최대 호스트 개수(주소 개수)는?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">16개 (256 - 240 = 16)</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q11.</span> IPv4의 주소 고갈 문제를 해결하기 위해 개발된 차세대 IP 주소 체계인 IPv6는 총 몇 비트인가?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">128비트</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q12.</span> IPv6 주소 체계는 몇 진수로 표기하며, 각 필드는 무엇으로 구분하는가?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">16진수, 콜론(:)으로 구분 (IPv4는 10진수, 점으로 구분)</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q13.</span> IPv6의 주요 전송 방식 3가지는 유니캐스트, 멀티캐스트, 그리고 나머지 하나는 무엇인가?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">애니캐스트 (Anycast)</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q14.</span> IPv6 전송 방식 중 송신자와 네트워크 토폴로지상 가장 가까운 단일 수신자에게 패킷을 전달하는 방식은?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">애니캐스트 (Anycast)</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q15.</span> 클래스 개념 없이 주소를 효율적으로 나누기 위해 `192.168.1.0/24` 처럼 슬래시 뒤에 네트워크 비트 수를 표기하는 방식은?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">CIDR (Classless Inter-Domain Routing)</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q16.</span> 내부 네트워크에서는 사설 IP를 쓰고, 외부 인터넷으로 나갈 때는 공인 IP 주소로 바꾸어주는 주소 변환 기술은?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">NAT (Network Address Translation)</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q17.</span> 192.168.10.0/24 네트워크에서 실제 컴퓨터(호스트)에 할당 가능한 유효한 IP 주소의 개수는 몇 개인가?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">254개 (전체 256개 중 네트워크 주소와 브로드캐스트 주소 2개를 제외)</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q18.</span> 공인 IP 주소 부족을 해결하기 위해 약속된 C 클래스 사설 IP 대역의 시작 주소는?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">192.168.0.0</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q19.</span> DHCP 서버로부터 IP를 할당받지 못했을 때 윈도우가 자동으로 할당하는 사설 주소 대역인 `169.254.X.X` 기술을 뜻하는 명칭은?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">APIPA (Automatic Private IP Addressing)</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q20.</span> 하나의 공인 IP에 여러 포트 번호를 지정하여 수많은 내부 사설 IP 호스트들이 동시에 인터넷을 쓰도록 돕는 NAT의 변형 기술은?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">PAT (Port Address Translation)</div>
+            </div>
+
+            /* 21~35: 계층별 프로토콜 핵심 */
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q21.</span> 상대방의 논리적 IP 주소를 기반으로 물리적 'MAC 주소'를 알아내기 위해 사용하는 3계층 프로토콜은?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">ARP (Address Resolution Protocol)</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q22.</span> IP 주소는 없고 MAC 주소만 알고 있는 디스크리스(Diskless) 단말기가 자신의 IP 주소를 서버로부터 알아낼 때 쓰는 프로토콜은?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">RARP (Reverse ARP)</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q23.</span> 수신측이 잘 받았는지 확인하는 '3-Way Handshaking' 과정을 거치는 신뢰성 기반의 전송 계층 프로토콜은?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">TCP</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q24.</span> 헤더가 단순하여 오버헤드가 적고 데이터 전송 속도가 가장 빠른 비연결성 전송 계층 프로토콜은?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">UDP</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q25.</span> 에러 보고 및 네트워크 상태 검사 목적의 프로토콜로, ping 명령어가 사용하는 인터넷 계층의 핵심 프로토콜은?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">ICMP</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q26.</span> IP 패킷이 수명을 다해 소멸하기 전까지 거칠 수 있는 최대 라우터 수(네트워크 경유 수)를 나타내는 IP 헤더 필드는?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">TTL (Time To Live)</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q27.</span> 웹(WWW) 페이지를 주고받을 때 기본적으로 사용하며, 기본 포트 번호로 80번을 사용하는 프로토콜은?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">HTTP</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q28.</span> HTTP의 보안 취약점을 해결하기 위해 암호화(SSL/TLS) 레이어를 추가하였으며, 포트 번호 443번을 쓰는 프로토콜은?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">HTTPS</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q29.</span> 네트워크를 통해 대용량 파일을 전송하고 수신하기 위해 고안된 제어용(21번 포트) 및 데이터용(20번 포트) 결합 프로토콜은?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">FTP (File Transfer Protocol)</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q30.</span> 인터넷 상에서 이메일을 다른 서버로 '송신(보낼 때)'할 때 사용하는 응용 계층 프로토콜(포트 번호 25)은?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">SMTP (Simple Mail Transfer Protocol)</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q31.</span> 이메일 서버에 저장된 메일을 사용자의 스마트폰이나 PC로 '수신(가져올 때)'하는 프로토콜로, 메일을 가져오면 서버에서 지우는 특징을 가진 것은?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">POP3 (Post Office Protocol version 3 / 110번 포트)</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q32.</span> POP3와 달리 이메일을 로컬로 완전히 다운로드하지 않고 서버에 둔 채 여러 단말기에서 동기화해 관리할 수 있는 메일 수신 프로토콜은?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">IMAP (Internet Message Access Protocol / 143번 포트)</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q33.</span> 멀리 떨어진 원격지의 컴퓨터에 접속하여 텍스트 기반 터미널 창을 제어할 수 있게 돕지만, 암호화 기능이 없는 평문 통신 프로토콜(23번 포트)은?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">Telnet (텔넷)</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q34.</span> 네트워크 장비의 시간(시계)을 표준 시간 서버와 동기화하기 위해 사용하는 프로토콜은?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">NTP (Network Time Protocol / 123번 포트)</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q35.</span> TCP 연결 설정 과정 중 송신측이 SYN 패킷을 보내고, 수신측이 대답으로 보내는 두 번째 단계의 패킷 명칭은?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">SYN-ACK 패킷</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q36.</span> 라우터 간에 정보를 주고받을 때 사용하는 프로토콜 중, 경유하는 라우터 수(Hop Count)를 기준으로 최대 15홉 제한을 가지는 소규모용 거리벡터 라우팅 프로토콜은?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">RIP (Routing Information Protocol)</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q37.</span> 홉 카운트의 제한이 없으며, 네트워크 변화를 빠르게 반영하고 링크 상태(Link State) 알고리즘을 기반으로 최적 경로를 계산하는 대규모용 라우팅 프로토콜은?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">OSPF (Open Shortest Path First)</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q38.</span> 윈도우 명령 프롬프트(CMD) 창에서 내 컴퓨터의 IP 주소, 서브넷 마스크, 게이트웨이 정보를 한눈에 확인하는 명령어는?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">ipconfig</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q39.</span> 리눅스(Linux) 환경에서 네트워크 인터페이스 카드의 설정 상태를 확인하고 IP를 세팅할 때 쓰는 명령어는?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">ifconfig</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q40.</span> 목적지 서버까지 거쳐가는 라우터들의 경로(IP 리스트)를 추적하여 네트워크 장애 구간을 진단할 수 있게 해주는 윈도우 명령어는?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">tracert (리눅스 환경에서는 traceroute)</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q41.</span> 내 컴퓨터에 현재 연결된 네트워크 연결 상태(세션 정보), 프로토콜별 통계 및 라우팅 테이블 정보를 출력해 주는 명령어는?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">netstat</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q42.</span> 도메인 네임 서버(DNS)의 동작 상태를 점검하거나 특정 도메인의 IP 주소를 직접 쿼리(질의)해 찾아볼 때 사용하는 명령어는?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">nslookup</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q43.</span> 내 컴퓨터의 ARP 캐시 테이블에 저장된 IP 주소와 MAC 주소의 매핑 목록을 확인하는 명령어는?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">arp -a</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q44.</span> IP 헤더의 무결성을 검증하기 위해 송신 측이 계산하여 삽입하고, 수신 측이 손상 여부를 확인하는 필드는?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">헤더 체크섬 (Header Checksum)</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q45.</span> 네트워크 보안 프로토콜로, IP 계층(3계층)에서 데이터의 기밀성(암호화)과 인증을 보장하여 주로 VPN 구축에 쓰이는 기술은?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">IPsec</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q46.</span> 전송 계층(TCP/IP) 단계에서 보안을 제공하며 웹브라우저와 서버 간 보안 통신(HTTPS)의 기반이 되는 프로토콜 체계는?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">SSL / TLS</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q47.</span> 하나의 도메인에 여러 개의 IP 주소를 등록하여 사용자들이 접속할 때마다 순차적으로 IP를 분산 할당하는 DNS 기반 부하 분산 기술은?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">DNS 라운드 로빈 (Round Robin)</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q48.</span> IP 패킷을 보낼 때 송신자의 IP 주소를 가짜 주소로 속여서 타깃 시스템을 마비시키는 네트워크 공격 기법은?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">IP 스푸핑 (Spoofing)</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q49.</span> 대량의 ICMP Echo Request(ping) 패킷을 브로드캐스트 주소로 유포하여 대상 컴퓨터에 트래픽 폭탄을 떨어뜨리는 DDoS 공격 유형은?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">스머프 공격 (Smurf Attack)</div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question"><span class="quiz-number">Q50.</span> TCP의 연결 설정 과정(3-Way Handshake)에서 SYN 패킷만 엄청나게 보내 서버의 접속 대기 큐를 가득 채워 마비시키는 공격은?</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">정답 확인</button>
+                <div class="quiz-answer">SYN 플러딩 (SYN Flooding)</div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 네트워크 관리사 2급 2과목 마스터 퀴즈 북. 합격을 응원합니다!</p>
+    </footer>
+
+    <script>
+        function toggleAnswer(button) {
+            const answerBox = button.nextElementSibling;
+            if (answerBox.classList.contains('visible')) {
+                answerBox.classList.remove('visible');
+                button.textContent = '정답 확인';
+            } else {
+                answerBox.classList.add('visible');
+                button.textContent = '정답 숨기기';
+            }
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+        }
+    </script>
+</body>
+</html>
